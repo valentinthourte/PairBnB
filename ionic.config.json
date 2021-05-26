@@ -1,5 +1,7 @@
 {
   "name": "ionic-angular-paid",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

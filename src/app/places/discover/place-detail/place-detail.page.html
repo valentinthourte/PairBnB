@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ isLoading ? "Loading..." : place.title }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/places/tabs/discover"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-text-center" *ngIf="isLoading">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+  <ion-grid *ngIf="!isLoading">
+    <ion-row>
+      <ion-col size="12" size-sm="6" offset-sm="3" class="ion-text-center">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ place.description }}</ion-card-title>
+            <ion-card-subtitle>{{ place.price | currency}}/mes </ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-row>
+              <ion-col size-sm="8" offset-sm="2">
+                <ion-img [src]="place.imageUrl"></ion-img>
+                <ion-button *ngIf="isBookable" color="primary" (click)="onBookPlace()" class="ion-margin-top" fill="outline">Reservar</ion-button>
+                <div *ngIf="!isBookable" class="ion-margin-top">
+                <p>You cant book a place offered by yourself</p>
+            </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size-md="6" offset-md="3" class="ion-no-padding">
+                <p>{{ place.location.address }}</p>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size-md="6" offset-md="3" class="ion-no-padding">
+                <ion-img role="button" (click)="onShowFullMap()" class="locationImage" [src]="place.location.staticMapImageUrl"></ion-img>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

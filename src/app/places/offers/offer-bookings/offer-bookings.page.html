@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Bookings for {{ place?.title }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/places/tabs/offers"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-text-center" *ngIf="isLoading">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+  <ion-row *ngIf="!isLoading">
+    <ion-col size-sm="8" offset-sm="2">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>All bookings</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let booking of bookings">
+              {{ booking.firstName }} {{ booking.lastName }} has booked your offer from {{ booking.bookedFrom }} to {{ booking.bookedTo }}
+            </ion-item>
+          </ion-list>
+          <ion-button class="ion-margin" color="medium" [routerLink]="['/', 'places', 'tabs', 'offers', 'edit', place.id]">Edit</ion-button>
+        </ion-card-content>
+      </ion-card>
+
+    </ion-col>
+  </ion-row>
+</ion-content>
